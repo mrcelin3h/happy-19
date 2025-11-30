@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ILuvU:3</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background: #4a555f; 
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      font-family: 'Pacifico', cursive;
+      overflow: hidden;
+    }
+
+    img {
+      width: 80%;
+      max-width: 400px;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+      position: absolute;
+    }
+
+    .show {
+      opacity: 1;
+    }
+
+    #button-container {
+      margin-top: 450px; 
+      opacity: 0;
+      transition: opacity 1s ease;
+      position: relative;
+      z-index: 10;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      background: #242857;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    #birthdayText {
+      font-size: 40px;
+      color: #ffffff;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Kalp animasyonu */
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      opacity: 0.8;
+      animation: fly 3s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 10px;
+      top: 0;
+    }
+
+    @keyframes fly {
+      0% { transform: translate(0,0) rotate(45deg); opacity: 1; }
+      100% { transform: translate(0,-300px) rotate(45deg); opacity: 0; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Resimler -->
+  <img id="scene1" src="images/scene1.png">
+  <img id="scene2" src="images/scene2.png">
+  <img id="scene3" src="images/scene3.png">
+  <img id="scene4" src="images/scene4.JPG">
+
+  <div id="button-container">
+    <button id="btn">Mumları söndür :3</button>
+  </div>
+
+  <div id="birthdayText">Happy Birthday &lt;3</div>
+
+  <script>
+    const scene1 = document.getElementById("scene1");
+    const scene2 = document.getElementById("scene2");
+    const scene3 = document.getElementById("scene3");
+    const scene4 = document.getElementById("scene4");
+    const buttonContainer = document.getElementById("button-container");
+    const button = document.getElementById("btn");
+    const birthdayText = document.getElementById("birthdayText");
+
+    // 1) scene1 fade-in
+    setTimeout(() => {
+      scene1.classList.add("show");
+    }, 300);
+
+    // 2) Daha uzun süre sonra scene2 (mumlu pasta) gel
+    setTimeout(() => {
+      scene1.style.display = "none";
+      scene2.style.display = "block";
+      scene2.classList.add("show");
+    }, 4000); // 4 saniye
+
+    // 3) Daha uzun süre sonra buton görünür
+    setTimeout(() => {
+      buttonContainer.style.opacity = 1;
+    }, 6000); // 6 saniye
+
+    // 4) Butona tıklayınca mumlar sönsün
+    button.addEventListener("click", () => {
+      scene2.classList.remove("show");
+      scene2.style.opacity = 0;
+      
+      setTimeout(() => {
+        scene2.style.display = "none";
+        scene3.style.display = "block";
+        scene3.classList.add("show");
+      }, 700);
+
+      // 5) 2 saniye sonra scene3 silikleşip kaybolsun, yazı + scene4 gelsin
+      setTimeout(() => {
+        scene3.classList.remove("show");
+        scene3.style.opacity = 0;
+        buttonContainer.style.opacity = 0; // buton kaybolur
+        setTimeout(() => {
+          scene3.style.display = "none";
+          birthdayText.style.opacity = 1;
+          scene4.style.display = "block";
+          scene4.classList.add("show");
+
+          // 6) Kalpler üret
+          for(let i=0; i<15; i++){
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.style.left = Math.random()*window.innerWidth + "px";
+            heart.style.animationDuration = (2+Math.random()*3) + "s";
+            heart.style.fontSize = (10 + Math.random()*10) + "px";
+            document.body.appendChild(heart);
+
+            // 5 saniye sonra kalbi kaldır
+            setTimeout(()=>{ heart.remove(); }, 5000);
+          }
+
+        }, 1000);
+      }, 2000);
+
+    });
+  </script>
+</body>
+</html>
