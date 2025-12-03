@@ -110,6 +110,7 @@
   <img id="scene2" src="images/scene2.png">
   <img id="scene3" src="images/scene3.png">
   <img id="scene4" src="images/scene4.JPG">
+  <img id="scene5" src="images/scene5.png" style="display:none;">
 
   <div id="button-container">
     <button id="btn">Mumu söndür :3</button>
@@ -122,6 +123,7 @@
     const scene2 = document.getElementById("scene2");
     const scene3 = document.getElementById("scene3");
     const scene4 = document.getElementById("scene4");
+    const scene5 = document.getElementById("scene5");
     const buttonContainer = document.getElementById("button-container");
     const button = document.getElementById("btn");
     const birthdayText = document.getElementById("birthdayText");
@@ -131,41 +133,55 @@
       scene1.classList.add("show");
     }, 300);
 
-    // 2) Daha uzun süre sonra scene2 (mumlu pasta) gel
+    // 2) scene2 gel
     setTimeout(() => {
       scene1.style.display = "none";
       scene2.style.display = "block";
       scene2.classList.add("show");
-    }, 4000); // 4 saniye
+    }, 4000);
 
-    // 3) Daha uzun süre sonra buton görünür
+    // 3) buton görünür
     setTimeout(() => {
       buttonContainer.style.opacity = 1;
-    }, 6000); // 6 saniye
+    }, 6000);
 
-    // 4) Butona tıklayınca mumlar sönsün
+    // 4) Butona tıklayınca
     button.addEventListener("click", () => {
       scene2.classList.remove("show");
       scene2.style.opacity = 0;
       
+      // scene3'e geçiş
       setTimeout(() => {
         scene2.style.display = "none";
         scene3.style.display = "block";
         scene3.classList.add("show");
       }, 700);
 
-      // 5) 2 saniye sonra scene3 silikleşip kaybolsun, yazı + scene4 gelsin
+      // scene3 → scene5
       setTimeout(() => {
         scene3.classList.remove("show");
         scene3.style.opacity = 0;
-        buttonContainer.style.opacity = 0; // buton kaybolur
+
         setTimeout(() => {
           scene3.style.display = "none";
+          scene5.style.display = "block";
+          scene5.classList.add("show");
+        }, 900);
+      }, 2000);
+
+      // scene5 → scene4 + yazı + kalpler
+      setTimeout(() => {
+        scene5.classList.remove("show");
+        scene5.style.opacity = 0;
+        buttonContainer.style.opacity = 0;
+
+        setTimeout(() => {
+          scene5.style.display = "none";
           birthdayText.style.opacity = 1;
           scene4.style.display = "block";
           scene4.classList.add("show");
 
-          // 6) Kalpler üret
+          // Kalpler
           for(let i=0; i<15; i++){
             const heart = document.createElement("div");
             heart.classList.add("heart");
@@ -174,13 +190,11 @@
             heart.style.fontSize = (10 + Math.random()*10) + "px";
             document.body.appendChild(heart);
 
-            // 5 saniye sonra kalbi kaldır
             setTimeout(()=>{ heart.remove(); }, 5000);
           }
 
         }, 1000);
-      }, 2000);
-
+      }, 5000); // Yeni sahnenin ekranda kalma süresi
     });
   </script>
 </body>
