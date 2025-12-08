@@ -1,0 +1,90 @@
+body {
+  background: #141b29;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  font-family: 'Pacifico', cursive;
+  overflow: hidden;
+}
+
+img {
+  width: 80%;
+  max-width: 400px;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  position: absolute;
+}
+
+.show {
+  opacity: 1;
+}
+
+#button-container {
+  margin-top: 450px;
+  opacity: 0;
+  transition: opacity 1s ease;
+  position: relative;
+  z-index: 10;
+}
+
+button {
+  padding: 12px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  background: #3f0606;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+#birthdayText {
+  font-size: 40px;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+  position: relative;
+  z-index: 10;
+}
+
+.heart {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: red;
+  transform: rotate(45deg);
+  opacity: 0.8;
+  animation: fly 3s linear infinite;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: red;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -10px;
+  left: 0;
+}
+
+.heart::after {
+  left: 10px;
+  top: 0;
+}
+
+@keyframes fly {
+  0% { transform: translate(0,0) rotate(45deg); opacity: 1; }
+  100% { transform: translate(0,-300px) rotate(45deg); opacity: 0; }
+}
